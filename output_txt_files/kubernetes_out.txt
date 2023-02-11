@@ -1,0 +1,8 @@
+ubuntu@ip-172-31-17-208:~/DevOps_Microservices/project-ml-microservice-kubernetes$ ./run_kubernetes.sh
+Error from server (AlreadyExists): pods "udacity-prediction" already exists
+NAME                 READY   STATUS    RESTARTS   AGE
+udacity-prediction   1/1     Running   0          110s
+Forwarding from 127.0.0.1:8085 -> 80
+Forwarding from [::1]:8085 -> 80
+Handling connection for 8085
+Handling connection for 8085
