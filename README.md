@@ -1,50 +1,92 @@
-<include a CircleCI status badge, here>
 
-## Project Overview
+[![aderounmu](https://circleci.com/gh/aderounmu/udacity-operationliaze-ml.svg?style=svg)](https://app.circleci.com/pipelines/github/aderounmu/udacity-operationliaze-ml/2/workflows/d97f91e4-37d8-43ee-b9b1-2261124d1530)
 
-In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
+# 👾 Operationalize of Machine learning model
 
-You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
 
-### Project Tasks
+This application is a Machine Learning Microservice API that predicts housing costs in Boston based on certain features. It uses a pre-trained "sklearn" model to make these predictions. The API is built using a Python Flask app that provides API calls to deliver predictions (inference) about the housing prices. The API is provided in a file called "app.py."  You may read more about the data on [the data source site] (https://www.kaggle.com/c/boston-housing), which was where the original Kaggle data came from. This project demonstrates the ability to operationalize a machine learning model as a microservice API, and it could be extended to include other pre-trained machine learning models for different purposes such as image recognition or data labeling.
 
-Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
-* Test your project code using linting
-* Complete a Dockerfile to containerize this application
-* Deploy your containerized application using Docker and make a prediction
-* Improve the log statements in the source code for this application
-* Configure Kubernetes and create a Kubernetes cluster
-* Deploy a container using Kubernetes and make a prediction
-* Upload a complete Github repo with CircleCI to indicate that your code has been tested
+## Requirements
 
-You can find a detailed [project rubric, here](https://review.udacity.com/#!/rubrics/2576/view).
+ * [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-**The final implementation of the project will showcase your abilities to operationalize production microservices.**
+ * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
 
----
+ * [hadolint](https://github.com/hadolint/hadolint)
 
-## Setup the Environment
+ * [Docker](https://docs.docker.com/engine/install/)
 
-* Create a virtualenv with Python 3.7 and activate it. Refer to this link for help on specifying the Python version in the virtualenv. 
+ * [Python3.7](https://www.python.org/downloads/release/python-370/)
+  
+## File directory
+
+    .
+    ├── .circleci               # Circle circle configuration folder
+    ├── model_data              # model data 
+    ├── output_txt_files        # Submission output files
+    ├── Dockerfile              # Docker file for creating images 
+    ├── make_prediction.sh      # Script to test docker and kubernetes deployment
+    ├── upload_docker.sh        # Script to upload to dockerhub
+    ├── run_docker.sh           # Script to build image and run container
+    ├── Makefile                # Make file to run make commands like lint , setup and install dependencies
+    ├── app.py                  # Main application file containing flaskapi
+    ├── requirements.txt        # Python requirements.txt 
+    ├── run_kubernetes.sh       # Script to deploy container to cluster 
+    └── README.md
+## Usage
+
+#### clone my-project with git
+
 ```bash
-python3 -m pip install --user virtualenv
-# You should have Python 3.7 available in your host. 
-# Check the Python path using `which python3`
-# Use a command similar to this one:
-python3 -m virtualenv --python=<path-to-Python3.7> .devops
-source .devops/bin/activate
+git clone https://github.com/aderounmu/udacity-operationliaze-ml.git
+
+cd udacity-operationliaze-ml
 ```
-* Run `make install` to install the necessary dependencies
 
-### Running `app.py`
+#### Create the venv
+```bash
+  make setup  
+```
+this creates a hidden virtual environment folder for python
 
-1. Standalone:  `python app.py`
-2. Run in Docker:  `./run_docker.sh`
-3. Run in Kubernetes:  `./run_kubernetes.sh`
+#### Activate venv
+```bash
+  source ~/.devops/bin/activate
+```
 
-### Kubernetes Steps
+#### Install dependencies
+```bash
+  make install
+```
 
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
+#### Lint application
+```bash
+  make lint
+```
+
+
+#### Run docker container
+```bash
+    chmod u+x run_docker.sh
+  ./run_docker.sh
+```
+
+#### Upload to docker hub
+```bash
+    chmod u+x upload_docker.sh
+  ./upload_docker.sh
+```
+
+#### Run in kubernetes
+```bash
+    chmod u+x run_kubernetes.sh
+  ./run_kubernetes.sh
+```
+
+
+#### Test API endpoint optional
+
+```bash
+    chmod u+x make_prediction.sh
+  ./make_prediction.sh
+```
